@@ -1,7 +1,6 @@
 package com.promineotech.jeep.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -44,7 +43,7 @@ class FetchJeepTest {
     
     
     ResponseEntity<List<Jeep>> response = restTemplate.exchange(uri, 
-        HttpMethod.GET, null, new ParameterizedTypeReference<List<Jeep>>() {});
+        HttpMethod.GET, null, new ParameterizedTypeReference<List<Jeep>>(){});
     
     assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
     
@@ -61,7 +60,7 @@ class FetchJeepTest {
             .trimLevel("Sport")
             .numDoors(2)
             .wheelSize(17)
-            .basePrice(new BigDecimal("24875.00"))
+            .basePrice(new BigDecimal("28475.00"))
             .build(),
         Jeep.builder()
             .modelId(JeepModel.WRANGLER)

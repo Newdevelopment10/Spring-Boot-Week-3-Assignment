@@ -2,10 +2,10 @@ package com.promineotech.jeep.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -24,16 +24,15 @@ public class DefaultJeepSalesDao implements JeepSalesDao {
   
   @Override
   public List<Jeep> fetchJeeps(JeepModel model, String trim) {
-    log.info("Dao: model={}, trim= {}", model, trim);
+    log.info("Dao: model={}, trim={}", model, trim);
     
-    String sql = ""
-        + "SELECT * "
-        + "FROM models "
-        + "WHERE model_id = :model"
-        + "AND trim_level = :trim";
+    String sql = "" + "SELECT * "  + "FROM models " + "WHERE model_id = :model_id" 
+    + " AND trim_level = :trim_level";
     
     Map<String, Object> params = 
-        Map.of("model", model.toString(), "trim", trim );
+        new HashMap<>();
+        params.put("model_id", model.toString());
+        params.put("trim_level", trim);
     
     return jdbcTemplate.query(sql, params, new RowMapper<>() {
 
